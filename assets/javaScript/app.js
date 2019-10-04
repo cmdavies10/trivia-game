@@ -13,14 +13,25 @@ var questionArray = [
     },
     {
         question: "What color is the sky",
-        answers: {
-            a: "Blue",
-            b: "Red",
-            c: "Green",
-            d: "Up"
-        },
+        answers: [
+            "Blue",
+            "Red",
+            "Green",
+            "Up"
+        ],
         correctAnswer: "Blue"
-    }
+    },
+    {
+        question: "How old am I?",
+        answers: [
+            "21",
+            "18",
+            "32",
+            "STFU"
+        ],
+        correctAnswer: "STFU"
+    },
+
 ];
 //     questions: [
 //         "What time is it?",
@@ -32,13 +43,13 @@ var questionArray = [
 //     ]
 // };
 
-var answersFirst = ["Four", "Midnight", "High Noon", "Game time"];
-var answersSecond = ["Blue", "Red", "Green", "Up"]
+// var answersFirst = ["Four", "Midnight", "High Noon", "Game time"];
+// var answersSecond = ["Blue", "Red", "Green", "Up"]
 
-console.log(questionArray[0].answers);
+// console.log(questionArray[0].answers);
 
 
-console.log(questionArray[0].answers.b);
+// console.log(questionArray[0].answers.b);
 // console.log(questionArray);
 // console.log(questionArray.answers[0]);
 
@@ -56,17 +67,20 @@ window.onload = function() {
     a.addClass("btn start-button");
     $(".question").append(a);
     $(".start-button").on("click", start);
+    // alert("this is working");
     
-    console.log(questionArray[0].answers);
-
+    // console.log(questionArray[0].answers);
 };
 
 // click an answer choice --> displays gif of correct answer, changes results, generates new question + answer choices  
-$(".choices").on("click", function (event) {
-    event.preventDefault();
-    var userGuess = $(this).val();
+$(".choices").on("click", function () {
+//     // event.preventDefault();
+    alert("this is working");
+    // var userGuess = $(this).val();
     // console.log($(this).val());
-})
+    // questionArray++;
+    // $(".question").text(questionArray[1].question);
+});
 
 // function that starts the game by pressing the start button
 function start() {
@@ -74,35 +88,44 @@ function start() {
         interalID = setInterval(count, 1 * 1000);
         clockRunning = true;
     }
-    // resetClock();
+    // // resetClock();
     // countdown = 30;
     // $(".timer").text("Time Remaining: " + countdown);
     // count();
 
     // question 1:
     $(".question").text(questionArray[0].question);
+    // console.log(questionArray[0].answers.length);
     // answer choices 1:
-    for (var i = 0; i < answersFirst.length; i++) {
-        console.log(answersFirst);
+    for (var i = 0; i < questionArray[0].answers.length; i++) {
+        console.log(questionArray[0].answers.length);
         var b = $("<button>");
-        b.text(answersFirst[i]);
+        b.text(questionArray[0].answers[i]);
         b.addClass("choices")
         $(".answers").append(b);
     };
+};
 
-    // question 2:
-    // if clock = zero OR user chooses an anwer, then --> display gif of correct answer, update score wins/losses, generate next question
-    if (countdown === 0) {
-        resetClock();
-        $(".question").text(questionArray[1].question);
-        for (var i = 0; i < answersSecond.length; i++) {
-            var b = $("<button>");
-            b.text(answersSecond[i]);
-            b.addClass("choices")
-            $(".answers").append(b);
-        };
-    }
 
+$(".choices").on("click", function () {
+//     stop();
+//     // resetClock();
+//     // interalID = setInterval(count, 1 * 1000);
+});
+
+//     // question 2:
+//     // if clock = zero OR user chooses an anwer, then --> display correct answer, update score wins/losses, generate next question
+
+    // if (countdown === 0) {
+    //     resetClock();
+    //     questionArray++;
+    //     $(".question").text(questionArray[1].question);
+    //     for (var i = 0; i < answersSecond.length; i++) {
+    //         var b = $("<button>");
+    //         b.text(answersSecond[i]);
+    //         b.addClass("choices")
+    //         $(".answers").append(b);
+    //     };
 
     // first range of answers:
     // for (var i = 0; i < answersFirst.length; i++) {
@@ -115,30 +138,64 @@ function start() {
 
     //     $(".answers").text(questionArray.answers[i]);
     // };
-};
+// };
 
-function resetClock() {
-    // set clock to 30 seconds
-    countdown = 30;
+// function resetClock() {
+//     // set clock to 30 seconds
+//     countdown = 30;
+//     count();
 
-    count();
-};
+// };
 
 function count() {
-     // show/change the current time display
+//      // show/change the current time display
     $(".timer").text("Time Remaining: " + countdown);
-    // decrement the countdown variable by 1
+//     // decrement the countdown variable by 1
     countdown--;
-   
-    
 
-    if (countdown === 0) {
+    if (countdown < 0) {
         stop();
-        resetClock();
-    }
+        alert("this is working");
+    //     resetClock();
+    };
+
+    $(".choices").on("click", function () {
+        // if (!clockRunning) {
+        //     interalID = setInterval(count, 1 * 1000);
+        //     clockRunning = true;
+        // }
+        stop();
+        $(".question").text(questionArray[1].question);
+        $(".answers").empty();
+        countdown = 30;
+        interalID = setInterval(count, 1 * 1000);
+        count();
+       
+        
+        // alert("this is working");
+        // questionArray++;
+        for (var i = 0; i < questionArray[1].answers.length; i++) {
+            console.log(questionArray[1].answers.length);
+            var b = $("<button>");
+            b.text(questionArray[1].answers[i]);
+            b.addClass("choices-2")
+            $(".answers").append(b);
+        };
+        count();
+    });
+
+    $(".choices-2").on("click", function () {
+        stop();
+        countdown = 31;
+        $(".question").text(questionArray[2].question);
+        $(".answers").empty();
+
+    });
+
+
 };
 
 function stop() {
     clearInterval(interalID);
     clockRunning = false;
-}
+};
