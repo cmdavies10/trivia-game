@@ -1,0 +1,29 @@
+body {
+    background-color: black;
+}
+
+.main {
+    background-color: palegoldenrod;
+    color: black;
+    text-align: center;
+    height: 500px;
+}
+
+.timer {
+    height: 30px;
+}
+
+.question {
+    height: 30px;
+}
+
+.answers {
+    height: 30px;
+}
+
+.btn {
+    background-color: lightpink;
+    color: black;
+    border: 1px solid;
+    width: 100px;
+}
