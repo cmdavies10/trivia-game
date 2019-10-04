@@ -73,14 +73,14 @@ window.onload = function() {
 };
 
 // click an answer choice --> displays gif of correct answer, changes results, generates new question + answer choices  
-$(".choices").on("click", function () {
-//     // event.preventDefault();
-    alert("this is working");
-    // var userGuess = $(this).val();
-    // console.log($(this).val());
-    // questionArray++;
-    // $(".question").text(questionArray[1].question);
-});
+// $(".choices").on("click", function () {
+// //     // event.preventDefault();
+//     alert("this is working");
+//     // var userGuess = $(this).val();
+//     // console.log($(this).val());
+//     // questionArray++;
+//     // $(".question").text(questionArray[1].question);
+// });
 
 // function that starts the game by pressing the start button
 function start() {
@@ -155,7 +155,21 @@ function count() {
 
     if (countdown < 0) {
         stop();
-        alert("this is working");
+        $(".question").text("NOPE!! The correct Answer is Game Time!");
+        setTimeout(function (questionOne) {
+            $(".question").text(questionArray[1].question);
+            $(".answers").empty();
+            countdown = 30;
+            interalID = setInterval(count, 1 * 1000);
+            count();
+            for (var i = 0; i < questionArray[1].answers.length; i++) {
+                console.log(questionArray[1].answers.length);
+                var b = $("<button>");
+                b.text(questionArray[1].answers[i]);
+                b.addClass("choices-2")
+                $(".answers").append(b);
+            };
+        }, 3 * 1000);
     //     resetClock();
     };
 
@@ -165,32 +179,95 @@ function count() {
         //     clockRunning = true;
         // }
         stop();
-        $(".question").text(questionArray[1].question);
-        $(".answers").empty();
-        countdown = 30;
-        interalID = setInterval(count, 1 * 1000);
-        count();
+        // setTimeout(function() {
+        if (userGuess === questionArray[0].correctAnswer) {
+            $(".question").text("CORRECT!");
+        } else {
+            $(".question").text("NOPE!! The correct answer is Game Time!");
+        };
+        // }, 5 * 1000);
+       
+        setTimeout(function (questionOne) {
+            $(".question").text(questionArray[1].question);
+            $(".answers").empty();
+            countdown = 30;
+            interalID = setInterval(count, 1 * 1000);
+            count();
+            for (var i = 0; i < questionArray[1].answers.length; i++) {
+                console.log(questionArray[1].answers.length);
+                var b = $("<button>");
+                b.text(questionArray[1].answers[i]);
+                b.addClass("choices-2")
+                $(".answers").append(b);
+            };
+        }, 3 * 1000);
+        
        
         
         // alert("this is working");
         // questionArray++;
-        for (var i = 0; i < questionArray[1].answers.length; i++) {
-            console.log(questionArray[1].answers.length);
-            var b = $("<button>");
-            b.text(questionArray[1].answers[i]);
-            b.addClass("choices-2")
-            $(".answers").append(b);
-        };
-        count();
+        
+        // count();
     });
 
     $(".choices-2").on("click", function () {
         stop();
-        countdown = 31;
         $(".question").text(questionArray[2].question);
         $(".answers").empty();
-
+        countdown = 30;
+        interalID = setInterval(count, 1 * 1000);
+        count();
+        for (var i = 0; i < questionArray[2].answers.length; i++) {
+            console.log(questionArray[2].answers.length);
+            var b = $("<button>");
+            b.text(questionArray[2].answers[i]);
+            b.addClass("choices-3")
+            $(".answers").append(b);
+        };
+        // count();
     });
+
+    $(".choices-3").on("click", function () {
+        // alert("this is working");
+        stop();
+        $(".question").text("GAME OVER!!!")
+        $(".timer").empty()
+        $(".answers").empty();
+        var b = $("<button class='start-over'>");
+        b.text("START OVER");
+        $(".answers").append(b);
+        // interalID = setInterval(count, 1 * 1000);
+        // count();
+    });
+
+    $(".start-over").on("click", function () {
+        alert("this is working");
+        // if (!clockRunning) {
+        stop();
+        // $(".question").text(questionArray[0].question);
+        // $(".answers").empty();
+        // countdown = 30;
+        // interalID = setInterval(count, 1 * 1000);
+        // count();
+            // clockRunning = true;
+        // }
+        // // resetClock();
+        // countdown = 30;
+        // $(".timer").text("Time Remaining: " + countdown);
+        // count();
+    
+        // question 1:
+        
+        // console.log(questionArray[0].answers.length);
+        // answer choices 1:
+        // for (var i = 0; i < questionArray[0].answers.length; i++) {
+        //     console.log(questionArray[0].answers.length);
+        //     var b = $("<button>");
+        //     b.text(questionArray[0].answers[i]);
+        //     b.addClass("choices")
+        //     $(".answers").append(b);
+        // };
+    })
 
 
 };
