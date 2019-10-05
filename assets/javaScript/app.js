@@ -1,4 +1,3 @@
-// add document ready function
 //create variables
 var questionArray = [
     {
@@ -33,74 +32,53 @@ var questionArray = [
     },
 ];
 
-// console.log(questionArray[0].answers);
-
-
-// console.log(questionArray[0].answers.b);
-// console.log(questionArray);
-// console.log(questionArray.answers[0]);
-
 var userGuess = [];
 var countdown = 30;
 var clockRunning = false;
 var numCorrect = 0;
 var numWrong = 0;
 
-
 // create starting page on load
 window.onload = function() {
     var a = $("<button>");
     a.text("Start!");
-    a.addClass("btn start-button");
+    a.addClass("btn btn-lg btn-success start-button");
     // a.attr("value", "start");
     $(".question").append(a);
     $(".start-button").on("click", start);
-    // alert("this is working");
-    
-    // console.log(questionArray[0].answers);
+};
+
+// stop function -- clear interval
+function stop() {
+    clearInterval(interalID);
 };
 
 // function that starts the game by pressing the start button
 function start() {
-    if (!clockRunning) {
-        interalID = setInterval(count, 1 * 1000);
-        clockRunning = true;
-    }
-    // // resetClock();
-    // countdown = 30;
-    // $(".timer").text("Time Remaining: " + countdown);
-    // count();
+    // set interval
+    interalID = setInterval(count, 1 * 1000);
 
-    // question 1:
+    // display question one and first answer array as buttons
     $(".question").text(questionArray[0].question);
-    console.log($(this).val());
-    // console.log(questionArray[0].answers.length);
-    // answer choices 1:
     for (var i = 0; i < questionArray[0].answers.length; i++) {
-        console.log(questionArray[0].answers.length);
         var b = $("<button>");
         b.text(questionArray[0].answers[i]);
         b.attr("value", questionArray[0].answers[i]);
-        b.addClass("choices")
+        b.addClass("choices btn btn-lg btn-primary")
         $(".answers").append(b);
     };
 };
 
-// function resetClock() {
-//     // set clock to 30 seconds
-//     countdown = 30;
-//     count();
-
-// };
-
+// count function -- contains nested functions 
 function count() {
-//      // show/change the current time display
-    $(".timer").text("Time Remaining: " + countdown);
-//     // decrement the countdown variable by 1
+    $(".timer").text("Time Remaining: " + countdown + " seconds");
     countdown--;
 
+    // First answer array 
     $(".choices").on("click", function () {
         stop();
+
+        // if statement logic for user guess 
         userGuess = $(this).val();
         if (userGuess === questionArray[0].answers[3]) {
             $(".question").text("Correct!")
@@ -109,20 +87,22 @@ function count() {
             $(".question").text("NOPE! The correct answer is Game Time");
             numWrong++;
         };
+
+        // if statement logic for timer -- not functioning (move outside the on click function?)
         if (countdown === 0) {
             stop();
             $(".question").text("TIMES UP! The correct answer is Game Time");
+            numWrong++;
+
             setTimeout(function (questionOne) {
                 $(".question").text(questionArray[1].question);
                 $(".answers").empty();
                 countdown = 30;
                 interalID = setInterval(count, 1 * 1000);
-                // count();
                 for (var i = 0; i < questionArray[1].answers.length; i++) {
-                    console.log(questionArray[1].answers.length);
                     var b = $("<button>");
                     b.text(questionArray[1].answers[i]);
-                    b.addClass("choices-2")
+                    b.addClass("btn btn-lg btn-primary choices-2")
                     $(".answers").append(b);
                 };
             }, 3 * 1000);
@@ -135,18 +115,16 @@ function count() {
             countdown = 30;
             interalID = setInterval(count, 1 * 1000);
             for (var i = 0; i < questionArray[1].answers.length; i++) {
-                console.log(questionArray[1].answers.length);
                 var b = $("<button>");
                 b.text(questionArray[1].answers[i]);
-                b.addClass("choices-2")
+                b.addClass("btn btn-lg btn-primary choices-2")
                 b.attr("value", questionArray[1].answers[i]);
                 $(".answers").append(b);
             };
         }, 3 * 1000);
     });
 
-    // stop();
-
+    // SECOND ANSWER ARRAY
     $(".choices-2").on("click", function () {
         stop();
         userGuess = $(this).val();
@@ -164,32 +142,43 @@ function count() {
             countdown = 30;
             interalID = setInterval(count, 1 * 1000);
             for (var i = 0; i < questionArray[2].answers.length; i++) {
-                console.log(questionArray[2].answers.length);
                 var b = $("<button>");
                 b.text(questionArray[2].answers[i]);
-                b.addClass("choices-3")
+                b.addClass("btn btn-lg btn-primary choices-3")
                 b.attr("value", questionArray[2].answers[i]);
                 $(".answers").append(b);
             };
         }, 3 * 1000);
     });
 
+    // THIRD ANSWER ARRAY 
     $(".choices-3").on("click", function () {
-        // alert("this is working");
         stop();
-        $(".timer").empty();
-        $(".timer").text("GAME OVER!!!");
-        $(".question").text("Correct Guesses: " + numCorrect + "-- Incorrect Guesses: " + numWrong);
-        $(".answers").empty();
-
-
-        var b = $("<button class='start-over'>");
-        b.text("START OVER");
-        $(".answers").append(b);
-        // interalID = setInterval(count, 1 * 1000);
-        // count();
+        userGuess = $(this).val();
+        if (userGuess === questionArray[2].answers[2]) {
+            $(".question").text("Correct!")
+            numCorrect++;
+        } else {
+            $(".question").text("Nope! The correct answer is Toy Story");
+            numWrong++;
+        };
+        setTimeout(function (questionTwo) {
+            stop();
+            $(".question").text(questionArray[2].question);
+            $(".answers").empty();
+            $(".timer").empty();
+            $(".timer").text("GAME OVER!!!");
+            // var newDiv = $("<div>");
+            // newDiv.text("Correct:  ");
+            $(".question").text("Correct Guesses: " + numCorrect + " / Incorrect Guesses: " + numWrong);
+            $(".answers").empty();
+            var b = $("<button class='btn btn-lg btn-danger start-over'>");
+            b.text("START OVER");
+            $(".answers").append(b);
+        }, 3 * 1000);
     });
 
+    // START OVER BUTTON -- on click that resets the game without re-loading the page 
     $(".start-over").on("click", function () {
         alert("this is working");
         // if (!clockRunning) {
@@ -222,7 +211,3 @@ function count() {
 
 };
 
-function stop() {
-    clearInterval(interalID);
-    // clockRunning = false;
-};

@@ -1,27 +1,34 @@
 body {
-    background-color: white;
+    background-color: lightskyblue;
 }
 
 .main {
-    background-color: palegoldenrod;
+    background-color: lightgoldenrodyellow;
     color: black;
     text-align: center;
-    height: 500px;
+    height: 450px;
+    align-content: center;
+}
+
+.game-title {
+    color: blue;
+    height: 50px;
 }
 
 .timer {
-    height: 30px;
+    height: 50px;
 }
 
 .question {
-    height: 30px;
+    height: 50px;
+    font-size: 20px;
 }
 
 .answers {
-    height: 30px;
+    height: 50px;
 }
 
-.btn {
+.start-button {
     background-color: lightpink;
     color: black;
     border: 1px solid;
