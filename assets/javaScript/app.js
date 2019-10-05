@@ -99,26 +99,6 @@ function count() {
 //     // decrement the countdown variable by 1
     countdown--;
 
-    // if (countdown === 0) {
-    //     stop();
-    //     $(".question").text("NOPE!! The correct Answer is Game Time!");
-    //     setTimeout(function (questionOne) {
-    //         $(".question").text(questionArray[1].question);
-    //         $(".answers").empty();
-    //         countdown = 30;
-    //         interalID = setInterval(count, 1 * 1000);
-    //         // count();
-    //         for (var i = 0; i < questionArray[1].answers.length; i++) {
-    //             console.log(questionArray[1].answers.length);
-    //             var b = $("<button>");
-    //             b.text(questionArray[1].answers[i]);
-    //             b.addClass("choices-2")
-    //             $(".answers").append(b);
-    //         };
-    //     }, 3 * 1000);
-    // //     resetClock();
-    // };
-
     $(".choices").on("click", function () {
         stop();
         userGuess = $(this).val();
@@ -129,8 +109,27 @@ function count() {
             $(".question").text("NOPE! The correct answer is Game Time");
             numWrong++;
         };
-        // console.log($(this).val());
+        if (countdown === 0) {
+            stop();
+            $(".question").text("TIMES UP! The correct answer is Game Time");
+            setTimeout(function (questionOne) {
+                $(".question").text(questionArray[1].question);
+                $(".answers").empty();
+                countdown = 30;
+                interalID = setInterval(count, 1 * 1000);
+                // count();
+                for (var i = 0; i < questionArray[1].answers.length; i++) {
+                    console.log(questionArray[1].answers.length);
+                    var b = $("<button>");
+                    b.text(questionArray[1].answers[i]);
+                    b.addClass("choices-2")
+                    $(".answers").append(b);
+                };
+            }, 3 * 1000);
+        };
+
         setTimeout(function (questionOne) {
+            stop();
             $(".question").text(questionArray[1].question);
             $(".answers").empty();
             countdown = 30;
@@ -146,6 +145,8 @@ function count() {
         }, 3 * 1000);
     });
 
+    // stop();
+
     $(".choices-2").on("click", function () {
         stop();
         userGuess = $(this).val();
@@ -156,7 +157,8 @@ function count() {
             $(".question").text("Nope! The correct answer is Blue");
             numWrong++;
         };
-        setTimeout(function(questionTwo) {
+        setTimeout(function (questionTwo) {
+            stop();
             $(".question").text(questionArray[2].question);
             $(".answers").empty();
             countdown = 30;
@@ -222,5 +224,5 @@ function count() {
 
 function stop() {
     clearInterval(interalID);
-    clockRunning = false;
+    // clockRunning = false;
 };
