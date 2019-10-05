@@ -34,7 +34,6 @@ var questionArray = [
 
 var userGuess = [];
 var countdown = 30;
-var clockRunning = false;
 var numCorrect = 0;
 var numWrong = 0;
 
@@ -76,10 +75,10 @@ function count() {
 
     // First answer array 
     $(".choices").on("click", function () {
-        stop();
-
-        // if statement logic for user guess 
+        stop(); 
         userGuess = $(this).val();
+
+        // user guess logic -- score tally not functioning?? add stop function after??
         if (userGuess === questionArray[0].answers[1]) {
             $(".question").text("Correct!")
             numCorrect++;
@@ -128,6 +127,7 @@ function count() {
     $(".choices-2").on("click", function () {
         stop();
         userGuess = $(this).val();
+
         if (userGuess === questionArray[1].answers[3]) {
             $(".question").text("Correct!")
             numCorrect++;
@@ -135,6 +135,7 @@ function count() {
             $(".question").text("Nope! The correct answer is Chicago Bulls");
             numWrong++;
         };
+
         setTimeout(function (questionTwo) {
             stop();
             $(".question").text(questionArray[2].question);
@@ -155,6 +156,7 @@ function count() {
     $(".choices-3").on("click", function () {
         stop();
         userGuess = $(this).val();
+
         if (userGuess === questionArray[2].answers[2]) {
             $(".question").text("Correct!")
             numCorrect++;
@@ -162,6 +164,7 @@ function count() {
             $(".question").text("Nope! The correct answer is Toy Story");
             numWrong++;
         };
+
         setTimeout(function (questionTwo) {
             stop();
             $(".question").text(questionArray[2].question);
