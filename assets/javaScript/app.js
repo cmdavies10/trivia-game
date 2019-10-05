@@ -65,6 +65,7 @@ window.onload = function() {
     var a = $("<button>");
     a.text("Start!");
     a.addClass("btn start-button");
+    // a.attr("value", "start");
     $(".question").append(a);
     $(".start-button").on("click", start);
     // alert("this is working");
@@ -95,12 +96,14 @@ function start() {
 
     // question 1:
     $(".question").text(questionArray[0].question);
+    console.log($(this).val());
     // console.log(questionArray[0].answers.length);
     // answer choices 1:
     for (var i = 0; i < questionArray[0].answers.length; i++) {
         console.log(questionArray[0].answers.length);
         var b = $("<button>");
         b.text(questionArray[0].answers[i]);
+        b.attr("value", questionArray[0].answers[i]);
         b.addClass("choices")
         $(".answers").append(b);
     };
@@ -174,20 +177,15 @@ function count() {
     };
 
     $(".choices").on("click", function () {
-        // if (!clockRunning) {
-        //     interalID = setInterval(count, 1 * 1000);
-        //     clockRunning = true;
-        // }
         stop();
-        // setTimeout(function() {
-        // if (userGuess === questionArray[0].correctAnswer) {
-        //     $(".question").text("CORRECT!");
-        // } else {
-        //     $(".question").text("NOPE!! The correct answer is Game Time!");
-        // };
-        // }, 5 * 1000);
-       
-        // setTimeout(function (questionOne) {
+        userGuess = $(this).val();
+        if (userGuess === questionArray[0].answers[3]) {
+            $(".question").text("Correct!")
+        } else {
+            $(".question").text("Nope! The correct answer is Game Time");
+        };
+        // console.log($(this).val());
+        setTimeout(function (questionOne) {
             $(".question").text(questionArray[1].question);
             $(".answers").empty();
             countdown = 30;
@@ -200,7 +198,7 @@ function count() {
                 b.addClass("choices-2")
                 $(".answers").append(b);
             };
-        // }, 3 * 1000);
+        }, 3 * 1000);
         
        
         
