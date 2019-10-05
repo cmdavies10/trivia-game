@@ -1,24 +1,24 @@
 //create variables
 var questionArray = [
     {
-        question: "What time is it?",
+        question: "Which of the following is NOT a name of one of the Spice Girls?",
         answers: [
-            "Four",
-            "Midnight",
-            "High Noon",
-            "Game Time"
+            "Sporty Spice",
+            "Fred Spice",
+            "Scary Spice",
+            "Posh Spice"
     ],
-        correctAnswer: "Game Time"
+        correctAnswer: "Fred Spice"
     },
     {
-        question: "What color is the sky?",
+        question: "Which NBA team won the most titles in the 90s?",
         answers: [
-            "Blue",
-            "Red",
-            "Green",
-            "Up"
+            "New York Knicks",
+            "Portland Trailblazers",
+            "Los Angeles Lakers",
+            "Chicago Bulls"
         ],
-        correctAnswer: "Blue"
+        correctAnswer: "Chicago Bulls"
     },
     {
         question: "What was the first full-length CGI movie?",
@@ -80,18 +80,18 @@ function count() {
 
         // if statement logic for user guess 
         userGuess = $(this).val();
-        if (userGuess === questionArray[0].answers[3]) {
+        if (userGuess === questionArray[0].answers[1]) {
             $(".question").text("Correct!")
             numCorrect++;
         } else {
-            $(".question").text("NOPE! The correct answer is Game Time");
+            $(".question").text("NOPE! The correct answer is Fred Spice");
             numWrong++;
         };
 
         // if statement logic for timer -- not functioning (move outside the on click function?)
         if (countdown === 0) {
             stop();
-            $(".question").text("TIMES UP! The correct answer is Game Time");
+            $(".question").text("TIMES UP! The correct answer is Fred Spice");
             numWrong++;
 
             setTimeout(function (questionOne) {
@@ -128,11 +128,11 @@ function count() {
     $(".choices-2").on("click", function () {
         stop();
         userGuess = $(this).val();
-        if (userGuess === questionArray[1].answers[0]) {
+        if (userGuess === questionArray[1].answers[3]) {
             $(".question").text("Correct!")
             numCorrect++;
         } else {
-            $(".question").text("Nope! The correct answer is Blue");
+            $(".question").text("Nope! The correct answer is Chicago Bulls");
             numWrong++;
         };
         setTimeout(function (questionTwo) {
