@@ -165,8 +165,9 @@ function count() {
             numWrong++;
         };
 
-        setTimeout(function (questionTwo) {
+        setTimeout(function (questionThree) {
             stop();
+            // intervalID = setInterval(count, 1 * 1000);
             $(".question").text(questionArray[2].question);
             $(".answers").empty();
             $(".timer").empty();
@@ -179,11 +180,13 @@ function count() {
             b.text("START OVER");
             $(".answers").append(b);
         }, 3 * 1000);
+        stop();
     });
 
     // START OVER BUTTON -- on click that resets the game without re-loading the page 
     $(".start-over").on("click", function () {
-        alert("this is working");
+        stop();
+        console.log("this is working");
         // if (!clockRunning) {
         stop();
         // $(".question").text(questionArray[0].question);
