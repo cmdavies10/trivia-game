@@ -107,11 +107,11 @@ function start() {
 };
 
 
-$(".choices").on("click", function () {
-//     stop();
-//     // resetClock();
-//     // interalID = setInterval(count, 1 * 1000);
-});
+// $(".choices").on("click", function () {
+// //     stop();
+// //     // resetClock();
+// //     // interalID = setInterval(count, 1 * 1000);
+// });
 
 //     // question 2:
 //     // if clock = zero OR user chooses an anwer, then --> display correct answer, update score wins/losses, generate next question
@@ -153,7 +153,7 @@ function count() {
 //     // decrement the countdown variable by 1
     countdown--;
 
-    if (countdown < 0) {
+    if (countdown === 0) {
         stop();
         $(".question").text("NOPE!! The correct Answer is Game Time!");
         setTimeout(function (questionOne) {
@@ -180,14 +180,14 @@ function count() {
         // }
         stop();
         // setTimeout(function() {
-        if (userGuess === questionArray[0].correctAnswer) {
-            $(".question").text("CORRECT!");
-        } else {
-            $(".question").text("NOPE!! The correct answer is Game Time!");
-        };
+        // if (userGuess === questionArray[0].correctAnswer) {
+        //     $(".question").text("CORRECT!");
+        // } else {
+        //     $(".question").text("NOPE!! The correct answer is Game Time!");
+        // };
         // }, 5 * 1000);
        
-        setTimeout(function (questionOne) {
+        // setTimeout(function (questionOne) {
             $(".question").text(questionArray[1].question);
             $(".answers").empty();
             countdown = 30;
@@ -200,7 +200,7 @@ function count() {
                 b.addClass("choices-2")
                 $(".answers").append(b);
             };
-        }, 3 * 1000);
+        // }, 3 * 1000);
         
        
         
